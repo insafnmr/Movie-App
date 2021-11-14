@@ -21,7 +21,7 @@ const AddMovie = ({ handleAddMovie }) => {
         event.preventDefault();
         handleAddMovie(newMovie)
         setNewMovie({
-            id: "",
+            id: uuidv4(),
             title: "",
             description: "",
             posterURL: "",
@@ -40,17 +40,16 @@ const AddMovie = ({ handleAddMovie }) => {
     return (
         <>
             <button type="button" class="btn btn-outline-danger" onClick={handleShow}>Add new movie</button>
-            <Modal style={{ backgroundColor: '#c2aab1' }} show={show} onHide={handleClose} animation={false} >
+            <Modal style={{ backgroundColor: 'transparent' }} show={show} onHide={handleClose} animation={false} >
                 <Modal.Header >
                     <Modal.Title> New Movie </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={mySubmitHandler}>
-                        <Form.Control type="text" name="id" placeholder="ID" onChange={handleChange} required />
                         <Form.Control type="text" name="title" placeholder="Title" onChange={handleChange} required />
-                        <Form.Control type="text" name="description" placeholder="Description" onChange={handleChange} required />
+                        <Form.Control type="text" as="textarea" name="description" placeholder="Description" onChange={handleChange} required />
                         <Form.Control type="text" name="posterURL" placeholder="PosterURL" onChange={handleChange} required />
-                        <Form.Control type="number" name="rate" placeholder="Rate" onChange={handleChange} required />
+                        <Form.Control type="number" name="rate" placeholder="Rate" onChange={handleChange} required min={0} max={7}/>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
